@@ -1,9 +1,10 @@
 package com.silviofranco.cursomc.resources;
 
 import com.silviofranco.cursomc.domain.Categoria;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.silviofranco.cursomc.services.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,16 +13,13 @@ import java.util.List;
 @RequestMapping("/categorias")
 public class CategoriaResource {
 
-    @RequestMapping(method = RequestMethod.GET) //posso anotar como @GetMapping
-    public List<Categoria> listar(){
+    @Autowired
+    private CategoriaService service;
 
-        Categoria cat1 = new Categoria(1, "Informática");
-        Categoria cat2 = new Categoria(2, "Escritório");
+    @GetMapping("/{id}")
+    public ResponseEntity<?> find(@PathVariable Integer id){
+        Categoria obj = service.find(id);
 
-        List<Categoria> lista = new ArrayList<>();
-        lista.add(cat1);
-        lista.add(cat2);
-
-        return lista;
+        return ResponseEntity.ok().body(obj);
     }
 }
