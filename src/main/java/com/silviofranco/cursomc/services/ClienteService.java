@@ -1,24 +1,23 @@
 package com.silviofranco.cursomc.services;
 
-import com.silviofranco.cursomc.domain.Categoria;
-import com.silviofranco.cursomc.repositories.CategoriaRepository;
+import com.silviofranco.cursomc.domain.Cliente;
+import com.silviofranco.cursomc.repositories.ClienteRepository;
 import com.silviofranco.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import java.util.Optional;
 
 @Service
-public class CategoriaService {
+public class ClienteService {
 
     @Autowired
-    private CategoriaRepository repo;
+    private ClienteRepository repo;
 
-    public Categoria find(Integer id) {
-        Optional<Categoria> obj = repo.findById(id);
+    public Cliente find(Integer id) {
+        Optional<Cliente> obj = repo.findById(id);
    return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id:" + id +
-                    ",Tipo: " + Categoria.class.getName()));
+                    ",Tipo: " + Cliente.class.getName()));
     }
 }
 
