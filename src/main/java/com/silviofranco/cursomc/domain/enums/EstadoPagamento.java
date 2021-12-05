@@ -33,9 +33,8 @@ public enum EstadoPagamento {
             if (cod.equals(x.getCod())){
                 return x;
             }
-
-            throw new IllegalArgumentException("Id inválido: " + cod);
         }
-        return null;
+
+        throw new IllegalArgumentException("Id inválido: " + cod);
     }
 }
