@@ -1,6 +1,5 @@
 package com.silviofranco.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.silviofranco.cursomc.domain.enums.EstadoPagamento;
 
