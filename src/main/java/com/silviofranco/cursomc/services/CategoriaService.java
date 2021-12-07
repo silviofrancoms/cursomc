@@ -2,9 +2,11 @@ package com.silviofranco.cursomc.services;
 
 import com.silviofranco.cursomc.domain.Categoria;
 import com.silviofranco.cursomc.repositories.CategoriaRepository;
+import com.silviofranco.cursomc.services.exceptions.DataIntegrityException;
 import com.silviofranco.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.dao.DataIntegrityViolationException;
 
 
 import java.util.Optional;
@@ -29,6 +31,16 @@ public class CategoriaService {
     public Categoria update(Categoria obj){
         find(obj.getId());
         return repo.save(obj);
+    }
+
+    public void delete(Integer id){
+        find(id); // chamei o metodo find, se não encontrar ele lançará a exception do find
+        try{
+            repo.deleteById(id);
+        }catch(DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos.");
+
+        }
     }
 }
 
